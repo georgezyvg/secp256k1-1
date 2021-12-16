@@ -2,9 +2,11 @@ import hashlib, random
 import urllib.request
 from hashlib import sha256
 import secp256k1 as ice
-import random, codecs, time, sys, atexit
+import random, codecs, time, sys, atexit, smtplib
 from time import sleep
 from rich.console import Console
+gmail_user = 'youremail@gmail.com'
+gmail_password = 'yourpassword'
 console = Console()
 console.clear()
 
@@ -97,10 +99,10 @@ while True:
         print('💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰')
         console.print('[red] [' + str(counter) + '] ------------------------[/red]')
         console.print('[red]🔁 Total Checked 👇[' + str(total) + '] [/red]')
-        console.print('🤩Address Uncompressed🤩: ', uaddr, ' [bold green]                            💸Total Received💸: ' + str(contents.decode('UTF8')))
-        console.print('🤩Address Compressed  🤩: ', caddr, ' [bold green]                            💸Total Received💸: ' + str(contents2.decode('UTF8')))
-        console.print('🤩Address 3 P2SH    🤩: ', P2SH, ' [bold green]                            💸Total Received💸: ' + str(contents3.decode('UTF8')))
-        console.print('🤩Address bc1 BECH32  🤩: ', BECH32, ' [bold green]                    💸Total Received💸: ' + str(contents4.decode('UTF8')))
+        console.print('🤩Address Uncompressed🤩: ', uaddr, ' [bold green]                    💸Total Received💸: ' + str(contents.decode('UTF8')))
+        console.print('🤩Address Compressed  🤩: ', caddr, ' [bold green]                    💸Total Received💸: ' + str(contents2.decode('UTF8')))
+        console.print('🤩Address 3 P2SH      🤩: ', P2SH, ' [bold green]                     💸Total Received💸: ' + str(contents3.decode('UTF8')))
+        console.print('🤩Address bc1 BECH32  🤩: ', BECH32, ' [bold green]                   💸Total Received💸: ' + str(contents4.decode('UTF8')))
         print('🔑 PrivateKey (WIF) Compressed   : ' + wifc)
         print('🔑 PrivateKey (WIF) UnCompressed : ' + wif)
         print('🔑 Private Key (HEX) : ' + HEX)
@@ -117,6 +119,30 @@ while True:
         f.write('\nAddress bc1 BECH32: ' + BECH32 + ' Total Received : ' + str(contents4.decode('UTF8')))
         f.write('\n =====Made by mizogg.co.uk Donations 3P7PZLbwSt2bqUMsHF9xDsaNKhafiGuWDB =====' ) 
         f.close()
+        sent_from = gmail_user
+        to = ['youremail@gmail.com']
+        subject = ['OMG Super Important Message']
+        body = '\nPrivatekey (dec): ' + str(ran) + '\nPrivatekey (hex): ' + HEX + '\nPrivatekey Uncompressed: ' + wif + '\nPrivatekey compressed: ' + wifc + '\nPublic Address 1 Uncompressed: ' + uaddr + ' Total Received : ' + str(contents.decode('UTF8')) + '\nPublic Address 1 Compressed: ' + caddr + ' Total Received : ' + str(contents2.decode('UTF8')) + '\nPublic Address 3 P2SH: ' + P2SH + ' Total Received : ' + str(contents3.decode('UTF8')) + '\nPublic Address bc1 BECH32: ' + BECH32 + ' Total Received : ' + str(contents4.decode('UTF8')) +'\n =====Made by mizogg.co.uk Donations 3P7PZLbwSt2bqUMsHF9xDsaNKhafiGuWDB =====\n'
+        
+        email_text = """\
+            From: %s
+            To: %s
+            Subject: %s
+
+            %s
+            """ % (sent_from, ", ".join(to), subject, body)
+
+        try:
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server.ehlo()
+            server.login(gmail_user, gmail_password)
+            server.sendmail(sent_from, to, email_text)
+            server.close()
+        
+            print ('Email sent!')
+        except:
+            print('Something went wrong...')
+            break
         for i in range(len(animation)):
             time.sleep(0.10)
             sys.stdout.write("\r" + "Merry Christmas:" + animation[i % len(animation)])
@@ -124,10 +150,10 @@ while True:
     else: 
         console.print('[red] [' + str(counter) + '] ------------------------[/red]')
         console.print('[red]🔁 Total Checked 👇[' + str(total) + '] [/red]')
-        console.print('😔 Address Uncompressed: ', uaddr, ' [red]                            😔Total Received😔 : ' + str(contents.decode('UTF8')))
-        console.print('😔 Address Compressed  : ', caddr, ' [red]                            😔Total Received😔 : ' + str(contents2.decode('UTF8')))
-        console.print('😔 Address 3 P2SH    : ', P2SH, ' [red]                            😔Total Received😔 : ' + str(contents3.decode('UTF8')))
-        console.print('😔 Address bc1 BECH32  : ', BECH32, ' [red]                    😔Total Received😔 : ' + str(contents4.decode('UTF8')))
+        console.print('😔 Address Uncompressed: ', uaddr, ' [red]                😔Total Received😔 : ' + str(contents.decode('UTF8')))
+        console.print('😔 Address Compressed  : ', caddr, ' [red]                😔Total Received😔 : ' + str(contents2.decode('UTF8')))
+        console.print('😔 Address 3 P2SH      : ', P2SH, ' [red]                😔Total Received😔 : ' + str(contents3.decode('UTF8')))
+        console.print('😔 Address bc1 BECH32  : ', BECH32, ' [red]        😔Total Received😔 : ' + str(contents4.decode('UTF8')))
         print('🔑 PrivateKey (WIF) Compressed : ' + wifc)
         print('🔑 PrivateKey (WIF) UnCompressed : ' + wif)
         print('🔑 Private Key (HEX) : ' + HEX)
