@@ -121,6 +121,10 @@ def main(counter):
             f.write('\nPublic Address bc1 BECH32: ' + BECH32)
             f.write('\n =====Made by mizogg.co.uk Donations 3P7PZLbwSt2bqUMsHF9xDsaNKhafiGuWDB =====' ) 
             f.close()
+            for i in range(len(animation)):
+                time.sleep(0.10)
+                sys.stdout.write("\r" + "Merry Christmas:" + animation[i % len(animation)])
+                sys.stdout.flush()
         else:
             print('Scan Number : ', str(count), ' : Total Checked : ', str(total), ' : Keys/s : ', str(speed), end='\r')
 
