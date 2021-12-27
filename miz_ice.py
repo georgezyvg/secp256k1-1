@@ -1,4 +1,5 @@
-import hashlib, random, codecs, time, sys
+# This Python file uses the following encoding: utf-8
+import hashlib, random, codecs, time, os, sys
 from hashlib import sha256
 import secp256k1 as ice
 from time import sleep
