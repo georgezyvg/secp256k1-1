@@ -39,7 +39,7 @@ with open(filename) as f:
         line != "\n"
         line_count += 1
 with open(filename) as file:
-    add = file.read(1024*1024).split()
+    add = file.read().split()
 add = set(add)
 print('Total Bitcoin Addresses Loaded and Checking : ',str (line_count))
 console.print("[yellow] ℹ️ Start search... Pick Range to start (Min=0 Max=256) ℹ️ [/yellow] ")
