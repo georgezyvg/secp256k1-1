@@ -3,7 +3,9 @@
 HUNT4BITCOIN RANGE DIVISION 100% using secp256k1.
 Divide the Chosen Range by 100% and Scan Sequentially or Randomly.
 
-Example :
+Added ETH Version Random_Miz_ETH.py & Miz_ETH.py RANGE DIVISION 100%
+
+Example : python miz_ice.py
 ```
  ✅ Start range in BITs (Puzzle StartNumber) ✍️ -> 0
  ⛔️ Stop range Max in BITs (Puzzle StopNumber)✍️ -> 10
