@@ -1,7 +1,7 @@
-# miz_ice.py
+# miz_ice.py & random_miz_ice.py
 
 HUNT4BITCOIN RANGE DIVISION 100% using secp256k1.
-Divide the Chosen Range by 100% and Scan Sequentially.
+Divide the Chosen Range by 100% and Scan Sequentially or Randomly.
 
 Example :
 ```
