@@ -1,33 +1,15 @@
-import hashlib, random
-import urllib.request
-from hashlib import sha256
 import secp256k1 as ice
-import random, codecs, time, sys, atexit, smtplib
+import random, codecs, time, sys, smtplib, urllib.request
 from time import sleep
 from rich.console import Console
-gmail_user = 'youremail@gmail.com'
+gmail_user = 'Youremail@gmail.com'
 gmail_password = 'yourpassword'
 console = Console()
 console.clear()
 
-W  = '\033[0m'  # white (normal)
-R  = '\033[31m' # red
-G  = '\033[32m' # green
-O  = '\033[33m' # orange
-B  = '\033[34m' # blue
-P  = '\033[35m' # purple
-
-my_colours = [W, R, G, O, B, P]
-
-icons= ['⏳', 'ℹ️', '✅', '⛔️', '🔁', '🔑', '💸', '😔', '🌍', '✍️', '🚌', '👇', '📋', '📣', '🤩','😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '🥲', '☺️', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🥸', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '🥵', '🥶', '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪', '😵', '🤐', '🥴', '🤢', '🤮', '🤧', '😷', '🤒', '🤕', '🤑', '🤠', '😈', '👿', '👹', '👺', '🤡', '💩', '👻', '💀', '☠️', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾', '👋', '🤚', '🖐', '✋', '🖖', '👌', '🤌', '🤏', '✌️', '🤞', '🤟', '🤘', '🤙', '👈', '👉', '👆', '🖕', '👇', '☝️', '👍', '👎', '✊', '👊', '🤛', '🤜', '👏', '🙌', '👐', '🤲', '🤝', '🙏', '✍️', '💅', '🤳', '💪', '🦾', '🦵', '🦿', '🦶', '👣', '👂', '🦻', '👃', '🫀', '🫁', '🧠', '🦷', '🦴', '👀', '👁', '👅', '👄', '💋', '🩸', '🐒', '🐔', '🐧', '🐦', '🐤', '🐣', '🐥', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🪱', '🐛', '🦋', '🐌', '🐞', '🐜', '🪰', '🪲', '🪳', '🦟', '🦗', '🕷', '🕸', '🦂', '🐢', '🐍', '🦎', '🦖', '🦕', '🐙', '🦑', '🦐', '🦞', '🦀', '🐡', '🐠', '🐟', '🐬', '🐳', '🐋', '🦈', '🐊', '🐅', '🐆', '🦓', '🦍', '🦧', '🦣', '🐘', '🦛', '🦏', '🐪', '🐫', '🦒', '🦘', '🦬', '🐃', '🐂', '🐄', '🐎', '🐖', '🐏', '🐑', '🦙', '🐐', '🦌', '🐕', '🐩', '🦮', '🐕‍🦺', '🐈', '🐈‍⬛', '🪶', '🐓', '🦃', '🦤', '🦚', '🦜', '🦢', '🦩', '🕊', '🐇', '🦝', '🦨', '🦡', '🦫', '🦦', '🦥', '🐁', '🐀', '🐿', '🦔', '🐾', '🐉', '🐲', '🌵', '🎄', '🌲', '🌳', '🌴', '🪵', '🌱', '🌿', '☘️', '🍀', '🎍', '🪴', '🎋', '🍃', '🍂', '🍁', '🍄', '🐚', '🪨', '🌾', '💐', '🌷', '🌹', '🥀', '🌺', '🌸', '🌼', '🌻', '🌞', '🌝', '🌛', '🌜', '🌚', '🌕', '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌙', '🌎', '🌍', '🌏', '🪐', '💫', '⭐️', '🌟', '✨', '⚡️', '☄️', '💥', '🔥', '🌪', '🌈', '☀️', '🌤', '⛅️', '🌥', '☁️', '🌦', '🌧', '⛈', '🌩', '🌨', '❄️', '☃️', '⛄️', '🌬', '💨', '💧', '💦', '☔️', '☂️', '🌊', '🌫', '⏰', '💰', '🎅🏻', '🎄', '🎁', '🎶']
-
 animation = ["❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️  0%","☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️  5%","☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 10%","☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 15%","☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 20%","☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 25%","☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 30%","☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 35%","☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 40%","☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 45%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 50%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️❄️ 55%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️❄️ 60%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️❄️ 65%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️❄️ 70%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️❄️ 75%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️❄️ 80%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️❄️ 85%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️❄️ 90%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️❄️ 95%","☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️☃️100%"]
 
-for i in range(len(animation)):
-    time.sleep(0.10)
-    sys.stdout.write("\r" + "Merry Christmas:" + animation[i % len(animation)])
-    sys.stdout.flush()
-console.print("\n[yellow]💰-----------------💰 HUNT4BITCOIN with Python BLOCKCHAIN API 💰----------------------💰[/yellow]")
+console.print("\n[yellow]💰-----------------💰 HUNT4BITCOIN  Online V2 with Python BLOCKCHAIN API 💰----------------------💰[/yellow]")
 console.print("[yellow]   🤖🤖🤖 Made by Mizogg  with help from Михаил Х.XopMC  https://github.com/XopMC 🤖🤖🤖[/yellow]")
 console.print("[yellow]    🤩 With iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  🤩 [/yellow]")
 console.print("[yellow]💰-----------------💰 HUNT4BITCOIN with Python BLOCKCHAIN API 💰----------------------💰[/yellow]")
@@ -40,30 +22,6 @@ b = 2**y
 console.print("[purple]⏳Starting search... Please Wait ⏳[/purple]")
 console.print("==========================================================")
 
-
-base58_alphabet = b'123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-
-def b58encode_int(x, default_one=True):
-    if not x and default_one:
-        return base58_alphabet[0:1]
-    base = len(base58_alphabet)
-    string = b''
-    while x:
-        x, remainder = divmod(x, base)
-        string = base58_alphabet[remainder:remainder+1] + string
-    return string
-
-def b58encode(x):
-    old_len = len(x)
-    x = x.lstrip(b'\0')
-    new_len = len(x)
-    acc = int.from_bytes(x, byteorder='big')
-    result = b58encode_int(acc, default_one=False)
-    return base58_alphabet[0:1] * (old_len - new_len) + result
-
-def b58encode_check(x):
-    digest = sha256(sha256(x).digest()).digest()
-    return b58encode(x + digest[:4])
 counter = 0
 total = 0
 
@@ -73,18 +31,8 @@ while True:
     ran=random.randrange(a,b)
     seed = str(ran)
     HEX = "%064x" % ran
-    private_key_hex_px = '80' + HEX
-    x = sha256(bytes.fromhex(private_key_hex_px)).hexdigest()
-    x = sha256(bytes.fromhex(x)).hexdigest()
-    checksum = x[:8]
-    private_key_hex_px_cs = private_key_hex_px + checksum
-    wif = b58encode(bytes.fromhex(private_key_hex_px_cs)).decode("utf-8")
-    private_key_hex_compressed_px = '80' + HEX + '01'
-    x = sha256(bytes.fromhex(private_key_hex_compressed_px)).hexdigest()
-    x = sha256(bytes.fromhex(x)).hexdigest()
-    checksumc = x[:8]
-    private_key_hex_compressed_px_cs = private_key_hex_compressed_px + checksumc
-    wifc = b58encode(bytes.fromhex(private_key_hex_compressed_px_cs)).decode("utf-8")
+    wifc = ice.btc_pvk_to_wif(HEX)
+    wifu = ice.btc_pvk_to_wif(HEX, False)
     caddr = ice.privatekey_to_address(0, True, int(seed)) #Compressed
     uaddr = ice.privatekey_to_address(0, False, int(seed))  #Uncompressed
     P2SH = ice.privatekey_to_address(1, True, int(seed)) #p2sh
@@ -104,14 +52,14 @@ while True:
         console.print('🤩Address 3 P2SH      🤩: ', P2SH, ' [bold green]                     💸Total Received💸: ' + str(contents3.decode('UTF8')))
         console.print('🤩Address bc1 BECH32  🤩: ', BECH32, ' [bold green]                   💸Total Received💸: ' + str(contents4.decode('UTF8')))
         print('🔑 PrivateKey (WIF) Compressed   : ' + wifc)
-        print('🔑 PrivateKey (WIF) UnCompressed : ' + wif)
+        print('🔑 PrivateKey (WIF) UnCompressed : ' + wifu)
         print('🔑 Private Key (HEX) : ' + HEX)
         print('🔑 Private Key (DEC) : ' + str(ran))
         print('💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰🤩💸💰')
         f=open("winner.txt","a")
         f.write('\nPrivatekey (dec): ' + str(ran))
         f.write('\nPrivatekey (hex): ' + HEX)
-        f.write('\nPrivatekey Uncompressed: ' + wif)
+        f.write('\nPrivatekey Uncompressed: ' + wifu)
         f.write('\nPrivatekey compressed: ' + wifc)
         f.write('\nAddress 1 Compressed: ' + caddr + ' Total Received : ' + str(contents2.decode('UTF8')))
         f.write('\nAddress 1 Uncompressed: ' + uaddr + ' Total Received : ' + str(contents.decode('UTF8')))
@@ -122,7 +70,7 @@ while True:
         sent_from = gmail_user
         to = ['youremail@gmail.com']
         subject = ['OMG Super Important Message']
-        body = '\nPrivatekey (dec): ' + str(ran) + '\nPrivatekey (hex): ' + HEX + '\nPrivatekey Uncompressed: ' + wif + '\nPrivatekey compressed: ' + wifc + '\nPublic Address 1 Uncompressed: ' + uaddr + ' Total Received : ' + str(contents.decode('UTF8')) + '\nPublic Address 1 Compressed: ' + caddr + ' Total Received : ' + str(contents2.decode('UTF8')) + '\nPublic Address 3 P2SH: ' + P2SH + ' Total Received : ' + str(contents3.decode('UTF8')) + '\nPublic Address bc1 BECH32: ' + BECH32 + ' Total Received : ' + str(contents4.decode('UTF8')) +'\n =====Made by mizogg.co.uk Donations 3P7PZLbwSt2bqUMsHF9xDsaNKhafiGuWDB =====\n'
+        body = '\nPrivatekey (dec): ' + str(ran) + '\nPrivatekey (hex): ' + HEX + '\nPrivatekey Uncompressed: ' + wifu + '\nPrivatekey compressed: ' + wifc + '\nPublic Address 1 Uncompressed: ' + uaddr + ' Total Received : ' + str(contents.decode('UTF8')) + '\nPublic Address 1 Compressed: ' + caddr + ' Total Received : ' + str(contents2.decode('UTF8')) + '\nPublic Address 3 P2SH: ' + P2SH + ' Total Received : ' + str(contents3.decode('UTF8')) + '\nPublic Address bc1 BECH32: ' + BECH32 + ' Total Received : ' + str(contents4.decode('UTF8')) +'\n =====Made by mizogg.co.uk Donations 3P7PZLbwSt2bqUMsHF9xDsaNKhafiGuWDB =====\n'
         
         email_text = """\
             From: %s
@@ -143,10 +91,7 @@ while True:
         except:
             print('Something went wrong...')
             break
-        for i in range(len(animation)):
-            time.sleep(0.10)
-            sys.stdout.write("\r" + "Merry Christmas:" + animation[i % len(animation)])
-            sys.stdout.flush()
+
     else: 
         console.print('[red] [' + str(counter) + '] ------------------------[/red]')
         console.print('[red]🔁 Total Checked 👇[' + str(total) + '] [/red]')
@@ -155,7 +100,7 @@ while True:
         console.print('😔 Address 3 P2SH      : ', P2SH, ' [red]                😔Total Received😔 : ' + str(contents3.decode('UTF8')))
         console.print('😔 Address bc1 BECH32  : ', BECH32, ' [red]        😔Total Received😔 : ' + str(contents4.decode('UTF8')))
         print('🔑 PrivateKey (WIF) Compressed : ' + wifc)
-        print('🔑 PrivateKey (WIF) UnCompressed : ' + wif)
+        print('🔑 PrivateKey (WIF) UnCompressed : ' + wifu)
         print('🔑 Private Key (HEX) : ' + HEX)
         print('🔑 Private Key (DEC) : ' + str(ran))
         console.print("[purple]⏳ Sleeping for 0.2 seconds... Please Wait ⏳[/purple]")
