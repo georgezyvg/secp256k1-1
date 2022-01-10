@@ -1,4 +1,4 @@
-import random, codecs
+import codecs
 import secp256k1 as ice
 from rich.console import Console
 console = Console()
