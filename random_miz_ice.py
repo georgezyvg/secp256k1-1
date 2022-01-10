@@ -46,7 +46,7 @@ total = 0
 while True:
     div= round(remainingtotal / 100)
     count += 1
-    total += 100
+    total += 400
     ran= random.randrange(start,finish)
     seed = str(ran)
     HEX = "%064x" % ran
