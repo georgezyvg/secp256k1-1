@@ -1,3 +1,5 @@
+Added New faster Version HASH160
+
 # miz_ice.py & random_miz_ice.py
 
 HUNT4BITCOIN RANGE DIVISION 100% using secp256k1.
