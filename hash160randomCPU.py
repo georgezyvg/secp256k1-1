@@ -29,7 +29,7 @@ def hunt(start, stop, h160, cores='all'):
     
         workers = []
         for r in range(cores):
-            p = Process(target=main, args=(counter, start, stop, h160, howmany))
+            p = Process(target=main, args=(counter, start, stop, h160))
             workers.append(p)
             p.start()
     
@@ -40,14 +40,14 @@ def hunt(start, stop, h160, cores='all'):
         exit('\nCTRL-C detected. Exiting gracefully. Thank you and Happy Hunting')
 
 
-def main(counter, start, stop, h160, howmany):
+def main(counter, start, stop, h160):
     count = 0
     st = time.time()
     sleep(0.00001)
     while True:
         with counter.get_lock():
             counter.value += 1
-        speed = round(counter.value/(time.time() - st)*howmany)
+        speed = round(counter.value/(time.time() - st))
         count += 1
         ran=random.randrange(start,stop)
         HEX = "%064x" % ran        
