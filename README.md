@@ -8,6 +8,10 @@ HASH160_sequence.py Version 2 https://github.com/Mizogg/secp256k1/blob/main/hash
 
 ![image](https://user-images.githubusercontent.com/88630056/152852007-e6dcf16d-9575-4e7d-bc3e-e5850d0419aa.png)
 
+HASH160randomCPU.py Version 1 scan randomly  in Range with CPU Speed Improvments https://github.com/Mizogg/secp256k1/blob/main/hash160randomCPU.py
+
+![image](https://user-images.githubusercontent.com/88630056/152853927-b7e47c02-0731-44f6-a589-2a7c8edf0ca0.png)
+
 https://mizogg.co.uk
 
 Added New faster Version HASH160
