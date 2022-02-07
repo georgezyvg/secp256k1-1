@@ -1,3 +1,11 @@
+Made by Mizogg Look for Bitcoin Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
+
+Good Luck and Happy Hunting Bitcoin_sequence.py Version 1 Range division by 1%-1000000% and scan sequentially
+https://github.com/Mizogg/secp256k1/blob/main/Bitcoin_sequence.py
+![image](https://user-images.githubusercontent.com/88630056/152852007-e6dcf16d-9575-4e7d-bc3e-e5850d0419aa.png)
+
+https://mizogg.co.uk
+
 Added New faster Version HASH160
 
 # miz_ice.py & random_miz_ice.py
