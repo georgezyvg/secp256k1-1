@@ -1,7 +1,7 @@
 '''
 Made by Mizogg Look for HASH160 Compressed and Uncompressed Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
 
-Good Luck and Happy Hunting HASH160_sequence.py Version 2 Range division by 1%-1000000% and scan sequentially 
+Good Luck and Happy Hunting HASH160_sequence.py Version 3 Range division by 1%-1000000% and scan sequentially 
 
 https://mizogg.co.uk
 
@@ -41,7 +41,8 @@ HEXSTOP = "%064x" % stop
 remainingtotal=stop-start
 div = round(remainingtotal / rangediv)
 finish = div + start
-
+count = 0
+total = 0
 
 def data_wallet():
     for i in range(0,rangediv):
@@ -68,6 +69,8 @@ while start < finish:
         remainingtotal-=mag
         finish-=mag
         start+=mag
+        count += 1
+        total += rangediv*2
         data_wallet()
         for data_w in data:
             hash160 = data_w['hash160']
@@ -84,6 +87,7 @@ while start < finish:
                     =====Made by mizogg.co.uk Donations 3P7PZLbwSt2bqUMsHF9xDsaNKhafiGuWDB =====""")
         else:
             for bad_wallet in data:
+                #print('Scan: ', count , ' :Remaining: ', str(finish), ' :Total: ', str(total), end='\r')
                 #print(bad_wallet['percent'], '\nPrivatekey (dec): ', bad_wallet['seed'], '\nPrivatekey (hex): ', bad_wallet['HEX'], '\nHASH160 Uncompressed: ', bad_wallet['hash160u'], '\nHASH160 compressed: ', bad_wallet['hash160'])
                 print(bad_wallet['percent'], '\nPrivatekey (hex): ', bad_wallet['HEX'], end='\r')
     except(KeyboardInterrupt, SystemExit):
