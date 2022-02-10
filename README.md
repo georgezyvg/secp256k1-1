@@ -2,9 +2,9 @@ Made by Mizogg Look for Bitcoin Using iceland2k14 secp256k1 https://github.com/i
 
 Good Luck and Happy Hunting Bitcoin_sequence.py Version 1 and HASH160_sequence.py Version 2 Range division by 1%-1000000% and scan sequentially
 
-Bitcoin_sequence.py Version 1 https://github.com/Mizogg/secp256k1/blob/main/Bitcoin_sequence.py
+Bitcoin_sequence.py Version 2 https://github.com/Mizogg/secp256k1/blob/main/Bitcoin_sequence.py
 
-HASH160_sequence.py Version 2 https://github.com/Mizogg/secp256k1/blob/main/hash160/HASH160_sequence.py
+HASH160_sequence.py Version 4 https://github.com/Mizogg/secp256k1/blob/main/hash160/HASH160_sequence.py
 
 HASH160_random.py Version 2 Range division by 1%-1000000% and scan randomly https://github.com/Mizogg/secp256k1/blob/main/hash160/HASH160_random.py
 
