@@ -1,13 +1,14 @@
 '''
 Made by Mizogg Look for Bitcoin Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
 
-Good Luck and Happy Hunting Bitcoin_sequence.py Version 1 Range division by 1%-1000000% and scan sequentially 
+Good Luck and Happy Hunting Bitcoin_sequence.py Version 2 Range division by 1%-1000000% and scan sequentially 
 
 https://mizogg.co.uk
 
 '''
 
 import secp256k1 as ice
+from alive_progress import alive_bar
 
 print('[+] Starting.........Please Wait.....Bitcoin List Loading.....')
 
@@ -17,8 +18,16 @@ with open(filename) as f:
     for line in f:
         line != "\n"
         line_count += 1
-with open(filename) as file:
-    add = file.read().split()
+def compute():
+    for i in range(line_count):
+        ...
+        yield
+
+with alive_bar(line_count) as bar:
+    with open(filename) as file:
+        add = file.read().split()
+        for i in compute():
+            bar()
 add = set(add)
 
 
@@ -27,18 +36,23 @@ start=int(input("start range Min 1-115792089237316195423570985008687907852837564
 stop=int(input("stop range Max 115792089237316195423570985008687907852837564279074904382605163141518161494336 -> "))
 mag=int(input("Magnitude Jump Stride -> "))
 rangediv=int(input("Division of Range 1% t0 ???% ->  "))
+display =int(input("Choose method Display Method: 1 - BAR:(New Under Testing); 2 - Less Details:(Quicker); 3 - More Details:(Slower)  "))
 print("Starting search... Please Wait min range: " + str(start))
 print("Max range: " + str(stop))
-print("==========================================================")
+print("========Bitcoin_sequence.py Version 2 Range division by 1%-1000000% and scan sequentially=======")
 print('Total Bitcoin Addresses Loaded and Checking : ',str (line_count))
 
-HEXSTART = "%064x" % start
-HEXSTOP = "%064x" % stop
- 
 remainingtotal=stop-start
 div = round(remainingtotal / rangediv)
 finish = div + start
+finishscan = round(stop / rangediv)
+count = 0
+total = 0
 
+def computermain():
+    for i in range(finishscan):
+        ...
+        yield
 
 def data_wallet():
     for i in range(0,rangediv):
@@ -64,8 +78,6 @@ def data_wallet():
             'percent': f"Hex scan Percent {i}%",
         })
     
-count = 0
-total = 0
 data = []
 
 while start < finish:
@@ -74,6 +86,8 @@ while start < finish:
         remainingtotal-=mag
         finish-=mag
         start+=mag
+        count += 1
+        total += rangediv*2
         data_wallet()
         for data_w in data:
             caddr = data_w['caddr']
@@ -94,9 +108,22 @@ while start < finish:
                     Public Address 3 P2SH:  {data_w['p2sh']}
                     Public Address bc1 BECH32:  {data_w['bech32']}
                     =====Made by mizogg.co.uk Donations 3P7PZLbwSt2bqUMsHF9xDsaNKhafiGuWDB =====""")
-        else:
-            for bad_wallet in data:
-                #print('\nPrivatekey (dec): ', bad_wallet['seed'], '\nPrivatekey (hex): ', bad_wallet['HEX'], '\nPrivatekey Uncompressed: ', bad_wallet['wifu'], '\nPrivatekey compressed: ', bad_wallet['wifc'], '\nPublic Address 1 Uncompressed: ', bad_wallet['uaddr'], '\nPublic Address 1 compressed: ', bad_wallet['caddr'], '\nPublic Address 3 P2SH: ', bad_wallet['p2sh'], '\nPublic Address bc1 BECH32: ', bad_wallet['bech32'])
-                print(bad_wallet['percent'], '\nPrivatekey (hex): ', bad_wallet['HEX'], end='\r')
+                    
+            else:
+                if display == 1:
+                    with alive_bar(finishscan, title='Processing') as bar:
+                        bar(start)
+                elif display == 2:
+                    for bad_wallet in data:
+                        print('Scan: ', count , ' :Remaining: ', str(finish), ' :Total: ', str(total), end='\r')
+                elif display == 3:
+                    for bad_wallet in data:
+                        #print('\nPrivatekey (dec): ', bad_wallet['seed'], '\nPrivatekey (hex): ', bad_wallet['HEX'], '\nPrivatekey Uncompressed: ', bad_wallet['wifu'], '\nPrivatekey compressed: ', bad_wallet['wifc'], '\nPublic Address 1 Uncompressed: ', bad_wallet['uaddr'], '\nPublic Address 1 compressed: ', bad_wallet['caddr'], '\nPublic Address 3 P2SH: ', bad_wallet['p2sh'], '\nPublic Address bc1 BECH32: ', bad_wallet['bech32'])
+                        print(bad_wallet['percent'], '\nPrivatekey (hex): ', bad_wallet['HEX'], end='\r')
+                else:
+                    print("WRONG NUMBER!!! MUST CHOSE 1, 2 or 3")
+                    break
+                
+                        
     except(KeyboardInterrupt, SystemExit):
         exit('\nCTRL-C detected. Exiting gracefully.  Thank you and Happy Hunting')
