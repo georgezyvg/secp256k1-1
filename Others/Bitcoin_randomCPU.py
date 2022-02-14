@@ -1,7 +1,7 @@
 '''
 Made by Mizogg Look for Bitcoin Compressed and Uncompressed 3 bc1 Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
 
-Good Luck and Happy Hunting Bitcoin_randomCPU.py Version 1 scan randomly  in Range with CPU Speed Improvments
+Good Luck and Happy Hunting Bitcoin_randomCPU.py Version 2 scan randomly  in Range with CPU Speed Improvments
 
 https://mizogg.co.uk
 
@@ -42,13 +42,12 @@ def hunt(start, stop, h160, cores='all'):
 
 def main(counter, start, stop, add):
     count = 0
-    st = time.time()
+    iteration = 0
+    start_time = time.time()
     sleep(0.00001)
     while True:
-        with counter.get_lock():
-            counter.value += 1
-        speed = round(counter.value/(time.time() - st))
-        count += 1
+        count += 4
+        iteration += 1
         ran=random.randrange(start,stop)
         seed = str(ran)
         HEX = "%064x" % ran   
@@ -72,7 +71,9 @@ def main(counter, start, stop, add):
             f.write('\nPublic Address 3 P2SH: ' + P2SH)
             f.write('\nPublic Address bc1 BECH32: ' + BECH32)
         else:
-            print(HEX, ' : Keys/s : ', str(speed), end='\r')
+            if iteration % 10000 == 0:
+                elapsed = time.time() - start_time
+                print(f'It/CPU={iteration} checked={count} Hex={HEX} Keys/Sec={iteration / elapsed:.1f}')
             
 
 if __name__ == '__main__':
