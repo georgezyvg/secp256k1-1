@@ -1,7 +1,7 @@
 '''
 Made by Mizogg Look for HASH160 Compressed and Uncompressed Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
 
-Good Luck and Happy Hunting HASH160randomCPU.py Version 1 scan randomly  in Range with CPU Speed Improvments
+Good Luck and Happy Hunting HASH160_randomCPU.py Version 2 scan randomly  in Range with CPU Speed Improvments
 
 https://mizogg.co.uk
 
@@ -42,13 +42,11 @@ def hunt(start, stop, h160, cores='all'):
 
 def main(counter, start, stop, h160):
     count = 0
-    st = time.time()
-    sleep(0.00001)
+    iteration = 0
+    start_time = time.time()
     while True:
-        with counter.get_lock():
-            counter.value += 1
-        speed = round(counter.value/(time.time() - st))
-        count += 1
+        iteration += 1
+        count += 2
         ran=random.randrange(start,stop)
         HEX = "%064x" % ran        
         hash160 = ice.privatekey_to_h160(0, True, ran).hex()
@@ -63,8 +61,10 @@ def main(counter, start, stop, h160):
             f.write('\nMatching HASH160 Uncompressed Found : ' + hash160u)
             f.close()
         else:
-            print(hash160, ' : Keys/s : ', str(speed), end='\r')
-            #print('\nHASH160 Uncompressed : ', hash160u, '\nHASH160 Compressed : ', hash160, '\nPrivatekey (dec): ', ran, '\nPrivatekey (hex): ', HEX)
+            if iteration % 10000 == 0:
+                elapsed = time.time() - start_time
+                print(f'It/CPU={iteration} checked={count} hash160={hash160} Keys/Sec={iteration / elapsed:.1f}')
+                #print('\nHASH160 Uncompressed : ', hash160u, '\nHASH160 Compressed : ', hash160, '\nPrivatekey (dec): ', ran, '\nPrivatekey (hex): ', HEX)
 
 
 if __name__ == '__main__':
