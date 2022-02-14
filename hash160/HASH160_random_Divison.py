@@ -1,15 +1,14 @@
 '''
 Made by Mizogg Look for HASH160 Compressed and Uncompressed Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
 
-Good Luck and Happy Hunting HASH160_random.py Version 2 Range division by 1%-1000000% and scan randomly  
+Good Luck and Happy Hunting HASH160_random_Divison.py Version 2 Range division by 1%-1000000% and scan randomly  
 
 https://mizogg.co.uk
 
 '''
 import secp256k1 as ice
-import time, multiprocessing, random
-from multiprocessing import pool, Event, Process, Queue, Value, cpu_count
-from time import sleep
+import random
+
 
 print('[+] Starting.........Please Wait.....HASH160 List Loading.....')
 
