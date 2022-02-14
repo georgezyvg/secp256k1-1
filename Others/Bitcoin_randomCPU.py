@@ -44,7 +44,6 @@ def main(counter, start, stop, add):
     count = 0
     iteration = 0
     start_time = time.time()
-    sleep(0.00001)
     while True:
         count += 4
         iteration += 1
