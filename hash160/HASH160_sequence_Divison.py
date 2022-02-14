@@ -1,7 +1,7 @@
 '''
 Made by Mizogg Look for HASH160 Compressed and Uncompressed Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
 
-Good Luck and Happy Hunting HASH160_sequence.py Version 4 Range division by 1%-1000000% and scan sequentially 
+Good Luck and Happy Hunting HASH160_sequence_Divison.py Version 4 Range division by 1%-1000000% and scan sequentially 
 
 https://mizogg.co.uk
 
@@ -32,11 +32,8 @@ with alive_bar(line_count) as bar:
         h160 = file.read().split()
         for i in compute():
             bar()
-        
 
 h160 = set(h160)
-
-        
        
 print('Total HASH160 Addresses Loaded and Checking : ',str (line_count))
 start=int(input("start range Min 1-115792089237316195423570985008687907852837564279074904382605163141518161494335 ->  "))
@@ -77,8 +74,7 @@ def data_wallet():
             'percent': f"Hex scan Percent {i}%",
         })
     
-count = 0
-total = 0
+
 data = []
 
 while start < finish:
@@ -107,7 +103,6 @@ while start < finish:
                 with alive_bar(finishscan, title='Processing') as bar:
                     bar(start)
             elif display == 2:
-                for bad_wallet in data:
                     print('Scan: ', count , ' :Remaining: ', str(finish), ' :Total: ', str(total), end='\r')
             elif display == 3:
                 for bad_wallet in data:
