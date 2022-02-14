@@ -1,7 +1,7 @@
 '''
 Made by Mizogg Look for Bitcoin Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
 
-Good Luck and Happy Hunting Bitcoin_sequence.py Version 2 Range division by 1%-1000000% and scan sequentially 
+Good Luck and Happy Hunting Bitcoin_sequence_Divison.py Version 2 Range division by 1%-1000000% and scan sequentially 
 
 https://mizogg.co.uk
 
@@ -39,7 +39,7 @@ rangediv=int(input("Division of Range 1% t0 ???% ->  "))
 display =int(input("Choose method Display Method: 1 - BAR:(New Under Testing); 2 - Less Details:(Quicker); 3 - More Details:(Slower)  "))
 print("Starting search... Please Wait min range: " + str(start))
 print("Max range: " + str(stop))
-print("========Bitcoin_sequence.py Version 2 Range division by 1%-1000000% and scan sequentially=======")
+print("========Bitcoin_sequence_Divison.py Version 2 Range division by 1%-1000000% and scan sequentially=======")
 print('Total Bitcoin Addresses Loaded and Checking : ',str (line_count))
 
 remainingtotal=stop-start
@@ -114,7 +114,6 @@ while start < finish:
                     with alive_bar(finishscan, title='Processing') as bar:
                         bar(start)
                 elif display == 2:
-                    for bad_wallet in data:
                         print('Scan: ', count , ' :Remaining: ', str(finish), ' :Total: ', str(total), end='\r')
                 elif display == 3:
                     for bad_wallet in data:
