@@ -1,7 +1,7 @@
 '''
 Made by Mizogg Look for ETH Using iceland2k14 secp256k1 https://github.com/iceland2k14/secp256k1  fastest Python Libary
 
-Good Luck and Happy Hunting Miz_ETH.py Version 2 Range division by 1%-1000000% and scan sequentially 
+Good Luck and Happy Hunting Miz_ETH_sequence_Divison.py Version 2 Range division by 1%-1000000% and scan sequentially 
 
 https://mizogg.co.uk
 
